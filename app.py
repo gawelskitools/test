@@ -4,7 +4,9 @@ import os
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # CORS für alle Routen aktivieren
+
+# Nur Anfragen von deiner GitHub Pages URL zulassen
+CORS(app, resources={r"/api/*": {"origins": "https://gawelskitools.github.io"}})
 
 # Setze den OpenAI API-Schlüssel als Umgebungsvariable in Heroku
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -27,3 +29,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
