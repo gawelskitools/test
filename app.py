@@ -11,6 +11,10 @@ CORS(app, resources={r"/api/*": {"origins": "https://gawelskitools.github.io"}})
 # Setze den OpenAI API-Schlüssel als Umgebungsvariable in Heroku
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+@app.route("/api/test", methods=["GET"])
+def test():
+    return jsonify({"message": "Die Route funktioniert!"}), 200
+
 @app.route("/api/chat", methods=["POST", "OPTIONS"])
 def chat():
     if request.method == "OPTIONS":
