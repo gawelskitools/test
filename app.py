@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import openai
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # CORS für alle Routen aktivieren
 
 # Setze den OpenAI API-Schlüssel als Umgebungsvariable in Heroku
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -14,7 +16,7 @@ def chat():
 
     # An ChatGPT API senden
     response = openai.Completion.create(
-        engine="text-davinci-003",  # Oder ein anderes Modell
+        engine="text-davinci-003",
         prompt=prompt,
         max_tokens=100
     )
